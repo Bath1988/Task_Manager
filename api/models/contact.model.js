@@ -5,7 +5,20 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true,
         },
-        // DEFINE YOUR MODEL HERE
+        description: {
+            type: Sequelize.STRING
+        },
+        
+    },{
+
+            classMethods: {
+                associate: function(models) {
+                Contact.hasMany(models.Phone)
+                
+            
+            }            
+
+        }
     });
   
     return Contact;

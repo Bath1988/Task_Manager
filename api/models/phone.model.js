@@ -5,8 +5,23 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true,
         },
-        // DEFINE YOUR MODEL HERE
-    });
-  
-    return Phone;
+        name: {
+            type: Sequelize.STRING
+        },
+        number: {
+            type: Sequelize.STRING
+        },
+        contactId: {
+            type: Sequelize.INTEGER
+        }
+    },{
+
+        classMethods: {
+            associate: function(models) {
+            Phone.belongsTo(models.Contact,{ foreignKey: 'contactId'})
+            }
+        }
+        
+    })
+        return Phone;
 };

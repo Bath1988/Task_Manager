@@ -3,15 +3,16 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    router.post("/contacts/:contactId/phones", phones.create);
+    //router.post("/phones/", phones.create);
+    router.post("/phones/", phones.create);
   
-    router.get("/contacts/:contactId/phones", phones.findAll);
+    router.get("/phones/", phones.findAll);
   
-    router.get("/contacts/:contactId/phones/:phoneId", phones.findOne);
+    router.get("/phones/:id", phones.findOne);
   
-    router.put("/contacts/:contactId/phones/:phoneId", phones.update);
+    router.put("/phones/:id", phones.update);
   
-    router.delete("/contacts/:contactId/phones/:phoneId", phones.delete);
+    router.delete("/phones/:id", phones.delete);
   
     app.use('/api', router);
 };
