@@ -1,7 +1,3 @@
-version: "3.8"
-
-#Update the connection among these microservices before starting the container.
-
 services:
   nginx:
     build:
@@ -10,9 +6,6 @@ services:
     ports:
       - 80:80
     depends_on:
-      - frontend
-     
-    links:
       - frontend
      
       
@@ -37,8 +30,7 @@ services:
       - ./api:/app
     depends_on:
       - db
-    links:
-      - db
+
 
   db:
     image: postgres:15.3-alpine3.18

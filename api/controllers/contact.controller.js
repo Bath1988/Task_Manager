@@ -36,15 +36,13 @@ exports.findAll = (req, res) => {
 
 // Get one contact by id
 exports.findOne = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.contactId;
     Contact.findByPk(id)
     .then(contact => {
-        if (contact==1) {
-            res.send(contact);       // Contact found
+        if (contact) {  // check if contact is not null
+            res.send(contact);
         } else { 
-            res.status(404).send({      // Contact not found
-                message: `Contact with id=${id} not found`
-            });
+            res.status(404).send({ message: `Contact with id=${id} not found` });
         }
     })
     .catch(err => {
@@ -53,6 +51,7 @@ exports.findOne = (req, res) => {
         });
     });
 };
+
 
 
 // Update one contact by id
@@ -104,3 +103,45 @@ exports.delete = (req, res) => {
         });
     });
 };
+
+// Get latest contact
+
+exports.findLatest = (req, res) => {
+    Contact.findOne({
+        order: [['createdAt', 'DESC']]
+    })
+    .then(contact => {
+        if (!contact) {
+            return res.status(404).send({ message: "No contacts found" });
+        }
+        res.send(contact);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving the latest contact"
+        });
+    });
+};
+/*
+exports.findLatest = (req, res) => {
+    // Just send test message for endpoint check
+    res.send({ message: "Test OK - endpoint wired" });
+
+    /*
+    Contact.findOne({
+        order: [['createdAt', 'DESC']]
+    })
+    .then(contact => {
+        if (!contact) {
+            return res.status(404).send({ message: "No contacts found" });
+        }
+        res.send(contact);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving the latest contact"
+        });
+    });
+    
+};
+*/

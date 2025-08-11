@@ -1,9 +1,17 @@
 FROM node:18.16.1-alpine3.18
 
-RUN mkdir -p /app
 WORKDIR /app
 
-RUN npm install nodemon -g
+# Install nodemon globally for hot reload
+RUN npm install -g nodemon
+
+# Copy package files and install dependencies at build time
+COPY package*.json ./
+RUN npm install
+
+# Copy rest of the app source
+COPY . .
 
 EXPOSE 5000
-CMD echo 1; npm install; echo 2; npx nodemon app.js
+
+CMD ["nodemon", "app.js"]
