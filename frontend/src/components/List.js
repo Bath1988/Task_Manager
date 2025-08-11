@@ -12,7 +12,7 @@ function Task(props) {
 
 
 	function onClick() {
-		fetch(`http://localhost/api/contacts/${props.id}`, {
+		fetch(`/api/contacts/${props.id}`, {
             		method: 'DELETE',
         	})
         	.then(() => {
@@ -37,7 +37,7 @@ function List(props) {
 	}
 
 	function onClick() {
-		fetch('http://localhost/api/contacts', {
+		fetch('/api/contacts', {
 			method: 'POST',
 			headers: {
 			'Content-Type': 'application/json'

@@ -8,7 +8,7 @@ function Num(props) {
 	function onClick() {
 
 
-		fetch(`http://localhost/api/phones/${props.id}`, {
+		fetch(`/api/phones/${props.id}`, {
             		method: 'DELETE',
         	})
         	.then(() => {
@@ -42,7 +42,7 @@ function Chil(props) {
 	
 	function onClick() {
 
-		fetch('http://localhost/api/phones', {
+		fetch('/api/phones', {
 			method: 'POST',
 			headers: {
 			'Content-Type': 'application/json'
