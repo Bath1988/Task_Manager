@@ -8,7 +8,7 @@ function App() {
     const [tasks, setTasks] = useState([]);
     
         useEffect(() => {
-        fetch('http://localhost/api/contacts')
+        fetch('/api/contacts')
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch((error) => {
