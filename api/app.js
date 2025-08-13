@@ -27,7 +27,6 @@ app.get("/", (req, res) => {
 
 require("./routes/people.routes")(app);
 require("./routes/tasks.routes")(app);
-require("./routes/stats.routes")(app);
 
 // set port, listen for requests
 const PORT = 5000;
