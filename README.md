@@ -1,6 +1,5 @@
-# CustomerApp
-
-A simple React application for managing people and their tasks.
+# Task_Manager
+This is a web application to manage work of people.
 
 ## Features
 
