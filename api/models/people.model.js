@@ -1,11 +1,20 @@
 module.exports = (sequelize, Sequelize) => {
-  const Contact = sequelize.define("contact", {
+  const People = sequelize.define("people", {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    description: {
+    name: {
+      type: Sequelize.STRING
+    },
+    phone: {
+      type: Sequelize.STRING
+    },
+    email: {
+      type: Sequelize.STRING
+    },
+    job: {
       type: Sequelize.STRING
     },
     createdAt: {
@@ -25,14 +34,5 @@ module.exports = (sequelize, Sequelize) => {
     freezeTableName: true,
   });
 
-  // Define associations in an associate method
-  Contact.associate = (models) => {
-    Contact.hasMany(models.Phone, {
-      foreignKey: 'contactId',
-      onDelete: 'CASCADE',
-      hooks: true
-    });
-  };
-  
-  return Contact;
+  return People;
 };

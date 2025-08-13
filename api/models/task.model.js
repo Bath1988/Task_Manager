@@ -1,27 +1,22 @@
 module.exports = (sequelize, Sequelize) => {
-    const Phone = sequelize.define("phone", {
+    const Task = sequelize.define("task", {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
+        action: {
             type: Sequelize.STRING
         },
-        number: {
+        remarks: {
             type: Sequelize.STRING
         },
-        contactId: {
+        personId: {
             type: Sequelize.INTEGER
         }
-    },{
-
-        classMethods: {
-            associate: function(models) {
-            Phone.belongsTo(models.Contact,{ foreignKey: 'contactId'})
-            }
-        }
-        
-    })
-        return Phone;
+    }, {
+        freezeTableName: true,
+        timestamps: false
+    });
+    return Task;
 };

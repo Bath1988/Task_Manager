@@ -1,26 +1,33 @@
-import { useState, useEffect} from 'react';
-import List from './components/List';
-import Stat from './components/Stat';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import People from './components/People';
+import Task from './components/Task';
+import Navbar from './components/Navbar';
 import './App.css';
 
 function App() {
-	
-    const [tasks, setTasks] = useState([]);
-    
-        useEffect(() => {
-        fetch('/api/contacts')
+    const [people, setPeople] = useState([]);
+
+    useEffect(() => {
+        fetch('/api/people')
             .then(response => response.json())
-            .then(data => setTasks(data))
+            .then(data => setPeople(data))
             .catch((error) => {
                 console.error('Error:', error);
             });
-    },[]);
+    }, []);
 
     return (
-        <div className='page'>     
-            <List tasks={tasks} setTasks={setTasks}/>
-            <Stat />
-        </div>
+        <Router>
+            <Navbar />
+            <div className='page'>
+                <Routes>
+                    <Route path="/people" element={<People people={people} setPeople={setPeople} />} />
+                    <Route path="/tasks" element={<Task />} />
+                </Routes>
+                
+            </div>
+        </Router>
     );
 }
 

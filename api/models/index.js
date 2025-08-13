@@ -19,12 +19,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-/* Create database tables and models */
+db.people = require("./people.model.js")(sequelize, Sequelize);
+db.tasks = require("./task.model.js")(sequelize, Sequelize);
 
-
-db.contacts = require("./contact.model.js")(sequelize, Sequelize);
-db.phones = require("./phone.model.js")(sequelize, Sequelize);
-db.contacts.hasMany(db.phones);
-db.phones.belongsTo(db.contacts);
+db.people.hasMany(db.tasks, { foreignKey: 'personId' });
+db.tasks.belongsTo(db.people, { foreignKey: 'personId' });
 
 module.exports = db;
